@@ -3,18 +3,23 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
 function Login() {
-    const host = "https://sk-inotebook.onrender.com";
     const [credentials, setcredentials] = useState("")
     let history = useHistory();
     const handleclick = async (e) =>{
         e.preventDefault();
-        const response = await fetch(`${host}/api/auth/login`, {
+        const response = await fetch(
+          "https://sk-inotebook.onrender.com/api/auth/login",
+          {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({email:credentials.email,password:credentials.password}),
-        });
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          }
+        );
         const json = await response.json();
         console.log(json);
         if(json.success){
