@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
 function Login() {
-    const host = "http://localhost:5000"
+    const host = "https://sk-inotebook.onrender.com";
     const [credentials, setcredentials] = useState("")
     let history = useHistory();
     const handleclick = async (e) =>{
