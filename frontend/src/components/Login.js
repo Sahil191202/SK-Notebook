@@ -8,7 +8,7 @@ function Login() {
     const handleclick = async (e) =>{
         e.preventDefault();
         const response = await fetch(
-          "https://sk-inotebook.onrender.com/api/auth/login",
+          "https://my-drive-sk.onrender.com/api/auth/login",
           {
             method: "POST",
             headers: {

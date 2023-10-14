@@ -8,7 +8,7 @@ function Signup() {
     const handleclick = async (e) =>{
         e.preventDefault();
         const response = await fetch(
-          "https://sk-inotebook.onrender.com/api/auth/createuser",
+          "https://my-drive-sk.onrender.com/api/auth/createuser",
           {
             method: "POST",
             headers: {
