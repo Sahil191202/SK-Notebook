@@ -1,0 +1,62 @@
+#home h1{
+    margin-left: 1em;
+}
+.contact-form1content{
+    display: flex;
+    padding: 15px;
+}
+.contact-form1content input{
+    padding-left: 1em;
+}
+.contact-form2content input{
+    padding-left: 1em;
+}
+.contact-form2content textarea{
+    padding-left: .6em;
+    padding-top: 0.6em;
+}
+.contact-inp1{
+    padding: 3px;
+    margin: 0px 12px;
+    width: 40%;
+    height: 38px;
+    outline: none;
+    background-color: transparent;
+    border: 4px solid #4FB2EF;
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    /* box-shadow: 10px 8px 15px white; */
+}
+.contact-inp2{
+    width: 82%;
+    height: 45px;
+    margin-left: 2em;
+    outline: none;
+    background-color: transparent;
+    border: 4px solid #4FB2EF;
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    
+}
+.contact-inp3{
+    width: 82%;
+    margin-left: 2.1em;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    border: 4px solid #4FB2EF;
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+}
+button{
+    margin-top: 0.8em;
+    margin-left: 2em;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 15px;
+    background-color: #4FB2EF;
+    border: 4px solid #4FB2EF;
+    border-radius: 30px;
+    backdrop-filter: blur(0px);
+    
+}
