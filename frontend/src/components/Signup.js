@@ -8,7 +8,7 @@ function Signup() {
     const handleclick = async (e) =>{
         e.preventDefault();
         const response = await fetch(
-          "https://my-drive-sk.onrender.com/api/auth/createuser",
+          "http://localhost:5000/api/auth/createuser",
           {
             method: "POST",
             headers: {

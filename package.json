@@ -1,11 +1,12 @@
 {
   "name": "inotebook",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "server" : "nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build ---prefix frontend"
   },
   "author": "",
   "license": "ISC",

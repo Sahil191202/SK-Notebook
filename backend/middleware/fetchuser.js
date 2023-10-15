@@ -11,7 +11,7 @@ const fetchuser = (req,res,next)=>{
         req.user = data.user;
         next();
     } catch (error) {
-        res.send(401);
+        res.sendStatus(401);
         
     }
 }

@@ -14,17 +14,17 @@ export default function Noteitem(props) {
   return (
     
     <div className='item'>
-      <div class="card text-center">
-  <div class="card-header">
+      <div className="card text-center">
+  <div className="card-header">
    NOTE
   </div>
-  <div class="card-body">
-    <h5 class="card-title">{note.title}</h5>
-    <p class="card-text">{note.description}</p>
-    <button class="btn btn-primary mx-2" onClick={()=>{deleteNote(note._id)}}>DELETE</button>
-    <button class="btn btn-primary mx-2" onClick={()=>{updateNote(note)}}>EDIT</button>
+  <div className="card-body">
+    <h5 className="card-title">{note.title}</h5>
+    <p className="card-text">{note.description}</p>
+    <button className="btn btn-primary mx-2" onClick={()=>{deleteNote(note._id)}}>DELETE</button>
+    <button className="btn btn-primary mx-2" onClick={()=>{updateNote(note)}}>EDIT</button>
   </div>
-  <div class="card-footer text-muted">
+  <div className="card-footer text-muted">
   Created At : {formateDate(note.date)}
   </div>
 </div>
