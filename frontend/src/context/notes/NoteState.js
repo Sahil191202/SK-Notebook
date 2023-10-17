@@ -6,14 +6,14 @@ const NoteState = (props) => {
   const notesinitial = [];
   const [notes, setNotes] = useState(notesinitial);
 
-  const addNote = async (title, description, tag) => {
+  const addNote = async (title, description, tag, images) => {
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag }),
+      body: JSON.stringify({ title, description, tag, images }),
     });
     const note = await response.json();
     setNotes(notes.concat(note));
@@ -47,14 +47,14 @@ const NoteState = (props) => {
     setNotes(newNotes);
   };
 
-  const editNote = async (id, title, description, tag) => {
+  const editNote = async (id, title, description, tag, images) => {
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag }),
+      body: JSON.stringify({ title, description, tag, images }),
     });
     const json = await response.json();
     console.log(json);
@@ -66,6 +66,7 @@ const NoteState = (props) => {
         newNotes[index].title = title;
         newNotes[index].description = description;
         newNotes[index].tag = tag;
+        newNotes[index].images = images;
         break;
       }
     }

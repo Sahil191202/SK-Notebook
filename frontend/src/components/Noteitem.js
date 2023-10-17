@@ -21,6 +21,7 @@ export default function Noteitem(props) {
   <div className="card-body">
     <h5 className="card-title">{note.title}</h5>
     <p className="card-text">{note.description}</p>
+    <img style={{maxHeight:"250px",maxWidth:"250px"}} src={note.images} alt="Image Not Found" />
     <button className="btn btn-primary mx-2" onClick={()=>{deleteNote(note._id)}}>DELETE</button>
     <button className="btn btn-primary mx-2" onClick={()=>{updateNote(note)}}>EDIT</button>
   </div>
