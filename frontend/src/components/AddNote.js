@@ -46,6 +46,9 @@ export default function AddNote() {
           setPic(data.url.toString());
           const Picture = data.url.toString();
           localStorage.setItem("link", Picture);
+          setTimeout(() => {
+            localStorage.removeItem("link")
+          }, 5000);
           setIsloading(false);
         })
         .catch((err) => {
