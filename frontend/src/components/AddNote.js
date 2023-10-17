@@ -48,7 +48,7 @@ export default function AddNote() {
           localStorage.setItem("link", Picture);
           setTimeout(() => {
             localStorage.removeItem("link")
-          }, 5000);
+          }, 10000);
           setIsloading(false);
         })
         .catch((err) => {

@@ -74,7 +74,7 @@ export default function Notes() {
           localStorage.setItem("link", Picture);
           setTimeout(() => {
             localStorage.removeItem("link")
-          }, 5000);
+          }, 10000);
           setIsloading(false);
         })
         .catch((err) => {
