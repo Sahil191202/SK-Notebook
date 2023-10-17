@@ -1,9 +1,10 @@
 import React from 'react'
+import Notes from "./Notes";
 
 export default function About() {
   return (
-    <div id='about'>
-      kya be gandu
+    <div>
+      <Notes />
     </div>
-  )
+  );
 }

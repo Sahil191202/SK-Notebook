@@ -1,51 +1,63 @@
-
-import noteContext from "../context/notes/noteContext"
-import React, { useContext, useState } from 'react'
+import noteContext from "../context/notes/noteContext";
+import React, { useContext, useState } from "react";
 
 export default function AddNote() {
-    const [pic, setPic] = useState();
-    const context = useContext(noteContext);
-    const {addNote} = context;
-    const [note, setNote] = useState({title:"",description:"",tag:"",images: localStorage.getItem("link")})
-    const handleclick =(e)=>{
-        e.preventDefault();
-        addNote(note.title,note.description,note.tag,note.images);
-        alert("Note Added Sucessfully");
-        setNote({title:"",description:"",tag:"",images:""});
-           
+  const [isloading, setIsloading] = useState(false);
+  const [pic, setPic] = useState();
+  const context = useContext(noteContext);
+  const { addNote } = context;
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    tag: "",
+    images: localStorage.getItem("link"),
+  });
+  const handleclick = (e) => {
+    e.preventDefault();
+    addNote(note.title, note.description, note.tag, note.images);
+    alert("Note Added Sucessfully");
+    setNote({ title: "", description: "", tag: "", images: "" });
+  };
+  const onchange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
+  const postDetails = (pics) => {
+    if (pics === undefined) {
+      alert("enter image");
+      return;
     }
-    const onchange =(e)=>{
-        setNote({...note,[e.target.name]:e.target.value})
-    }
-    const postDetails = (pics) => {
-      if (pics === undefined) {
-        alert("enter image")
-        return;
-      }
-      console.log(pics);
-      if (pics.type === "image/jpeg" || pics.type === "image/png") {
-        const data = new FormData();
-        data.append("file", pics);
-        data.append("upload_preset", "skdrive");
-        data.append("cloud_name", "dvilwjvzj");
-        fetch("https://api.cloudinary.com/v1_1/dvilwjvzj/image/upload", {
-          method: "post",
-          body: data,
+    setIsloading(true);
+    console.log(pics);
+    if (
+      pics.type === "image/jpeg" ||
+      pics.type === "image/png" ||
+      pics.type === "image/jpg"
+    ) {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "skdrive");
+      data.append("cloud_name", "dvilwjvzj");
+      fetch("https://api.cloudinary.com/v1_1/dvilwjvzj/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          const Picture = data.url.toString();
+          localStorage.setItem("link", Picture);
+          setIsloading(false);
         })
-          .then((res) => res.json())
-          .then((data) => {
-            setPic(data.url.toString());
-            const Picture = data.url.toString();
-            localStorage.setItem("link", Picture);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        alert("Enter Image")
-        return;
-      }
-    };
+        .catch((err) => {
+          console.log(err);
+          setIsloading(false);
+        });
+    } else {
+      alert("Enter Image");
+      setIsloading(false);
+      return;
+    }
+  };
 
   return (
     <div className="container">
@@ -76,6 +88,7 @@ export default function AddNote() {
               required
             ></textarea>
             <br />
+            <br />
             <input
               type="text"
               name="tag"
@@ -85,22 +98,32 @@ export default function AddNote() {
               value={note.tag}
               required
               onChange={onchange}
-              />
+            />
+            <br/>
+            <br/>
             <input
               type="file"
               className="contact-inp2"
               accept="image/*"
               name="images"
               id="images"
+              style={{paddingTop:".3em",paddingLeft:'1.3em'}}
               onChange={(e) => postDetails(e.target.files[0])}
             />
+            <br/>
+            <br/>
             <button
-              disabled={note.title.length < 5 || note.description.length < 5}
+              disabled={note.title.length < 5 || note.description.length < 5 || isloading}
               type="submit"
               onClick={handleclick}
             >
-              {" "}
-              Submit Note{" "}
+              {isloading ? (
+                <div className="spinner-grow" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Submit Note"
+              )}
             </button>
           </div>
         </form>

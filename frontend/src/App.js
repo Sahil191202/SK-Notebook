@@ -18,16 +18,10 @@ function App() {
    <NoteState>
    <Router>
    <Navbar/>
-   <Alert message="React Is Worlds Chutiya Language"/>
+   <Alert message="Welcome To My Drive App Guyzzz By Sahil Khan"/>
       <Switch>
         <Route path="/about">
           <About />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/login">
-          <Login />
         </Route>
         <Route path="/">
           <Home />

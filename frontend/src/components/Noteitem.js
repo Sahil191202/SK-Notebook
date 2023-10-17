@@ -15,13 +15,15 @@ export default function Noteitem(props) {
     
     <div className='item'>
       <div className="card text-center">
-  <div className="card-header">
+  <div className="card-header" style={{fontSize:"1.2em",color:"red",fontWeight:"bold"}}>
    NOTE
   </div>
   <div className="card-body">
-    <h5 className="card-title">{note.title}</h5>
+    <h5 className="card-title" style={{fontWeight:"bolder"}}>{note.title}</h5>
     <p className="card-text">{note.description}</p>
-    <img style={{maxHeight:"250px",maxWidth:"250px"}} src={note.images} alt="Image Not Found" />
+    <a href={note.images} target='_blank'>
+      <img style={{maxHeight:"200px",maxWidth:"150px"}} src={note.images} alt="Image Not Found" />
+      </a>
     <button className="btn btn-primary mx-2" onClick={()=>{deleteNote(note._id)}}>DELETE</button>
     <button className="btn btn-primary mx-2" onClick={()=>{updateNote(note)}}>EDIT</button>
   </div>
