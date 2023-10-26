@@ -17,6 +17,10 @@ const NoteState = (props) => {
     });
     const note = await response.json();
     setNotes(notes.concat(note));
+    setTimeout(() => {
+      localStorage.removeItem("link")
+      
+    }, 3000);
   };
 
   const getNotes = async () => {
@@ -71,6 +75,9 @@ const NoteState = (props) => {
       }
     }
     setNotes(newNotes);
+    setTimeout(() => {
+      localStorage.removeItem("link");
+    }, 3000);
   };
   return (
     <NoteContext.Provider
