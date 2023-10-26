@@ -10,7 +10,7 @@ export default function AddNote() {
     title: "",
     description: "",
     tag: "",
-    images: localStorage.getItem("link"),
+    images: "",
   });
   const handleclick = (e) => {
     e.preventDefault();
@@ -46,9 +46,6 @@ export default function AddNote() {
           setPic(data.url.toString());
           const Picture = data.url.toString();
           localStorage.setItem("link", Picture);
-          setTimeout(() => {
-            localStorage.removeItem("link")
-          }, 10000);
           setIsloading(false);
         })
         .catch((err) => {

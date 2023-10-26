@@ -15,7 +15,7 @@ export default function Notes() {
     etitle: "",
     edescription: "",
     etag: "",
-    eimages: localStorage.getItem("link"),
+    eimages: "",
   });
   let history = useHistory();
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Notes() {
       etitle: currentNote.title,
       edescription: currentNote.description,
       etag: currentNote.tag,
-      eimages: localStorage.getItem("link"),
+      eimages: currentNote.images,
     });
   };
   const handlechange = (e) => {
@@ -72,9 +72,6 @@ export default function Notes() {
           setPic(data.url.toString());
           const Picture = data.url.toString();
           localStorage.setItem("link", Picture);
-          setTimeout(() => {
-            localStorage.removeItem("link")
-          }, 10000);
           setIsloading(false);
         })
         .catch((err) => {

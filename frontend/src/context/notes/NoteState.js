@@ -13,7 +13,7 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag, images }),
+      body: JSON.stringify({ title, description, tag, images:localStorage.getItem("link") }),
     });
     const note = await response.json();
     setNotes(notes.concat(note));
@@ -54,7 +54,7 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag, images }),
+      body: JSON.stringify({ title, description, tag, images:localStorage.getItem("link") }),
     });
     const json = await response.json();
     console.log(json);
