@@ -16,7 +16,7 @@ function Signup() {
     e.preventDefault();
     setIsloading(true);
     const response = await fetch(
-      "http://localhost:5000/api/auth/createuser",
+      "https://your-notes-by-sk.onrender.com/api/auth/createuser",
       {
         method: "POST",
         headers: {
