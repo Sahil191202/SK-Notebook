@@ -23,6 +23,12 @@ const NotesSchema = new Schema({
     images:{
         type: String,
     },
+    pdf:{
+        type: String,
+    },
+    video:{
+        type: String,
+    },
     date:{
         type:Date,
         default:Date.now

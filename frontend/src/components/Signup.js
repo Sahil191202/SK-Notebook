@@ -4,10 +4,12 @@ import { useHistory } from "react-router-dom";
 
 function Signup() {
   const [isloading, setIsloading] = useState(false);
+  const [pic, setPic] = useState();
   const [credentials, setcredentials] = useState({
     name: "",
     email: "",
     password: "",
+    profile:"",
   });
   let history = useHistory();
   const handleclick = async (e) => {
@@ -24,6 +26,7 @@ function Signup() {
           name: credentials.name,
           email: credentials.email,
           password: credentials.password,
+          profile: localStorage.getItem("profile"),
         }),
       }
     );
@@ -31,13 +34,50 @@ function Signup() {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      history.push("/about");
+      history.push("/notes");
       setIsloading(false);
     }
   };
 
   const handlechange = (e) => {
     setcredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+  const postDetails = (pics) => {
+    if (pics === undefined) {
+      alert("enter image");
+      return;
+    }
+    setIsloading(true);
+    console.log(pics);
+    if (
+      pics.type === "image/jpeg" ||
+      pics.type === "image/png" ||
+      pics.type === "image/jpg"
+    ) {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "skdrive");
+      data.append("cloud_name", "dvilwjvzj");
+      fetch("https://api.cloudinary.com/v1_1/dvilwjvzj/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          const Picture = data.url.toString();
+          localStorage.setItem("profile", Picture);
+          setIsloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsloading(false);
+        });
+    } else {
+      alert("Enter Image");
+      setIsloading(false);
+      return;
+    }
   };
 
   return (
@@ -86,6 +126,18 @@ function Signup() {
               onChange={handlechange}
               className="form-control"
               id="exampleInputPassword1"
+            />
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Profile Picture
+            </label>
+            <input
+              type="file"
+              className="contact-inp2"
+              accept="image/*"
+              name="profile"
+              id="profile"
+              style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+              onChange={(e) => postDetails(e.target.files[0])}
             />
           </div>
           <div className="mb-3 form-check">

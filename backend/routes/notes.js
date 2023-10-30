@@ -13,19 +13,46 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
         res.status(500).send("Some Error Occured")
     }
 });
+router.get("/fetchallvideo", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id, video : {$exists:true,$ne:null}}).select("video").select("date")
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Some Error Occured");
+}
+});
+router.get("/fetchallimages", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id , images : {$exists:true,$ne:null} }).select("images").select("date")
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Some Error Occured");
+}
+});
+router.get("/fetchallpdf", fetchuser, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id , pdf : {$exists:true,$ne:null} }).select("pdf").select("date")
+    res.json(notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Some Error Occured");
+}
+});
 
 router.post('/addnote', fetchuser, [
     body('title').isLength({ min: 3 }),
     body('description').isLength({ min: 5 })
 ], async (req, res) => {
     try {
-        const { title, description, tag, images} = req.body;
+        const { title, description, tag, images, pdf, video} = req.body;
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
         const note = new Note({
-            title, description, tag, images, user: req.user.id
+            title, description, tag, images, pdf, video, user: req.user.id
         })
         const savednote = await note.save();
         res.json(savednote)
@@ -36,13 +63,15 @@ router.post('/addnote', fetchuser, [
 });
 
 router.put('/updatenote/:id', fetchuser, async (req, res) => {
-    const { title, description, tag, images } = req.body;
+    const { title, description, tag, images, pdf, video } = req.body;
     const newNote = {}
 
     if (title) { newNote.title = title };
     if (description) { newNote.description = description };
     if (tag) { newNote.tag = tag };
     if (images) { newNote.images = images };
+    if (pdf) { newNote.pdf = pdf };
+    if (video) { newNote.video = video };
 
     let note = await Note.findById(req.params.id)
     if (!note) {

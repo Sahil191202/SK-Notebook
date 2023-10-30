@@ -38,6 +38,7 @@ router.post(
         name: req.body.name,
         email: req.body.email,
         password: secPass,
+        profile: req.body.profile,
       });
       const data = {
         user: {

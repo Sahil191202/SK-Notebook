@@ -16,6 +16,8 @@ export default function Notes() {
     edescription: "",
     etag: "",
     eimages: "",
+    evideo:"",
+    epdf:"",
   });
   let history = useHistory();
   useEffect(() => {
@@ -28,8 +30,9 @@ export default function Notes() {
   }, []);
   const handleclick = (e) => {
     e.preventDefault();
-    editNote(note.id, note.etitle, note.edescription, note.etag, note.eimages);
+    editNote(note.id, note.etitle, note.edescription, note.etag, note.eimages, note.evideo, note.epdf);
     refClose.current.click();
+    window.confirm("Please Reload The Page To Reflect The Changes");
   };
   const ref = useRef(null);
   const refClose = useRef(null);
@@ -42,6 +45,8 @@ export default function Notes() {
       edescription: currentNote.description,
       etag: currentNote.tag,
       eimages: currentNote.images,
+      evideo: currentNote.video,
+      epdf: currentNote.pdf
     });
   };
   const handlechange = (e) => {
@@ -52,7 +57,7 @@ export default function Notes() {
       alert("enter image");
       return;
     }
-    setIsloading(true)
+    setIsloading(true);
     console.log(pics);
     if (
       pics.type === "image/jpeg" ||
@@ -78,9 +83,78 @@ export default function Notes() {
           console.log(err);
           setIsloading(false);
         });
-      } else {
-        alert("Enter Image");
-        setIsloading(false);
+    } else {
+      alert("Enter Image");
+      setIsloading(false);
+      return;
+    }
+  };
+
+  //video
+  const postDetailvideo = (videos) => {
+    if (videos === undefined) {
+      alert("Enter video");
+      return;
+    }
+    setIsloading(true);
+    console.log(videos);
+    if (videos.type === "video/mp4") {
+      const data = new FormData();
+      data.append("file", videos);
+      data.append("upload_preset", "skdrive");
+      data.append("cloud_name", "dvilwjvzj");
+      fetch("https://api.cloudinary.com/v1_1/dvilwjvzj/video/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          const Picture = data.url.toString();
+          localStorage.setItem("video", Picture);
+          setIsloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsloading(false);
+        });
+    } else {
+      alert("Enter Video");
+      setIsloading(false);
+      return;
+    }
+  };
+  //pdf
+  const postDetailpdf = (pdfs) => {
+    if (pdfs === undefined) {
+      alert("Enter Pdf");
+      return;
+    }
+    setIsloading(true);
+    console.log(pdfs);
+    if (pdfs.type === "application/pdf") {
+      const data = new FormData();
+      data.append("file", pdfs);
+      data.append("upload_preset", "skdrive");
+      data.append("cloud_name", "dvilwjvzj");
+      fetch("https://api.cloudinary.com/v1_1/dvilwjvzj/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          const Picture = data.url.toString();
+          localStorage.setItem("pdf", Picture);
+          setIsloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsloading(false);
+        });
+    } else {
+      alert("Enter PDF");
+      setIsloading(false);
       return;
     }
   };
@@ -153,15 +227,43 @@ export default function Notes() {
                     onChange={handlechange}
                   />
                   <br />
-                  <br />
+                  <span style={{ marginLeft: "2.2em" }}>
+                    Please Select Image To Upload
+                  </span>
                   <input
                     type="file"
                     name="eimages"
-                    id="images"
+                    id="eimages"
                     accept="image/*"
                     style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
                     className="contact-inp2"
                     onChange={(e) => postDetail(e.target.files[0])}
+                  />
+                  <br />
+                  <span style={{ marginLeft: "2.2em" }}>
+                    Please Select Pdf To Upload
+                  </span>
+                  <input
+                    type="file"
+                    className="contact-inp2"
+                    accept="application/pdf"
+                    name="epdf"
+                    id="epdf"
+                    style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+                    onChange={(e) => postDetailpdf(e.target.files[0])}
+                  />
+                  <br />
+                  <span style={{ marginLeft: "2.2em" }}>
+                    Please Select Video To Upload
+                  </span>
+                  <input
+                    type="file"
+                    className="contact-inp2"
+                    accept="video/*"
+                    name="evideo"
+                    id="evideo"
+                    style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+                    onChange={(e) => postDetailvideo(e.target.files[0])}
                   />
                   <br />
                   <br />

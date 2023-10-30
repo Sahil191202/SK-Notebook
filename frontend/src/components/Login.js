@@ -26,7 +26,7 @@ function Login() {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      history.push("/about");
+      history.push("/notes");
       setIsloading(false);
     } else {
       setIsloading(false);

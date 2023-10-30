@@ -9,18 +9,31 @@ import {
   Route
 } from 'react-router-dom'
 import NoteState from './context/notes/NoteState';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Video from './components/Video';
+import Images from './components/Images';
+import Pdf from './components/Pdf';
+import NewNav from './components/NewNav';
+
 
 function App() {
   return (
    <>
    <NoteState>
    <Router>
+   <NewNav/>
    <Navbar/>
    <Alert message="Welcome To My Drive App Guyzzz By Sahil Khan"/>
       <Switch>
-        <Route path="/about">
+        <Route path="/pdf">
+          <Pdf />
+        </Route>
+        <Route path="/images">
+          <Images />
+        </Route>
+        <Route path="/video">
+          <Video />
+        </Route>
+        <Route path="/notes">
           <About />
         </Route>
         <Route path="/">
