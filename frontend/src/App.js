@@ -13,11 +13,13 @@ import Video from './components/Video';
 import Images from './components/Images';
 import Pdf from './components/Pdf';
 import NewNav from './components/NewNav';
+import AuthState from './context/auth/AuthState';
 
 
 function App() {
   return (
    <>
+   <AuthState>
    <NoteState>
    <Router>
    <NewNav/>
@@ -42,6 +44,7 @@ function App() {
       </Switch>
     </Router>
     </NoteState>
+   </AuthState>
    </>
   );
 }

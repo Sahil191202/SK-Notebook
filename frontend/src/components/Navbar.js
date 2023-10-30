@@ -1,18 +1,43 @@
-import React, { useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import authContext from '../context/auth/AuthContext';
 export default function Navbar() {
+  const [input, setInput] = useState(false)
+   const [password, setPassword] = useState("");
+   const [newPassword, setNewPassword] = useState("");
   let history = useHistory();
   const handlelogout =()=>{
     localStorage.removeItem('token')
     history.push('/login')
+    refClose.current.click()
   }
    const modal = () => {
      ref.current.click();
    };
    const ref = useRef(null);
    const refClose = useRef(null);
-
+   const context = useContext(authContext);
+  const { credentials, getUser, changePassword } = context;
+  const [credential, setCredential] = useState({
+    id:"",
+    epassword:""
+  })
+   const handlechangepass = (e) => {
+    e.preventDefault();
+    changePassword(credential.id,credential.password);
+   }
+   const handlechange = (e) => {
+    setCredential({ ...credential, [e.target.name]: e.target.value });
+  };
+  useEffect(() => {
+      getUser();
+    // eslint-disable-next-line
+  }, []);
+  const Changepass = () =>{
+    setInput(!input)
+  
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -65,7 +90,7 @@ export default function Navbar() {
                 <form class="d-flex">
                   <img
                     onClick={modal}
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src={credentials.profile}
                     class="rounded-circle"
                     style={{ width: "50px" }}
                     alt="Avatar"
@@ -93,9 +118,9 @@ export default function Navbar() {
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header ">
                     <h5 class="modal-title" id="exampleModalLabel">
-                      Modal title
+                      Profile
                     </h5>
                     <button
                       type="button"
@@ -103,9 +128,7 @@ export default function Navbar() {
                       class="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                    >
-                      Close
-                    </button>
+                    ></button>
                   </div>
                   <div
                     class="modal-body"
@@ -113,16 +136,52 @@ export default function Navbar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      flexDirection: "column",
                     }}
                   >
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      src={credentials.profile}
                       class="rounded-circle"
                       style={{
                         width: "100px",
                       }}
                       alt="Avatar"
                     />
+                    <h3>{credentials.name}</h3>
+                    <h3>{credentials.email}</h3>
+                    {input ?     (<div>
+      <h2>Change Password</h2>
+      <form onSubmit={handlechangepass}>
+        <label>
+          Old Password:
+          <input
+          id='epassword'
+          name='epassword'
+            type="password"
+            onChange={handlechange}
+          />
+        </label>
+        <label>
+          New Password:
+          <input
+          name='epassword'
+            type="password"
+            onChange={handlechange}
+          />
+        </label>
+        <button type="submit">Change Password</button>
+      </form>
+    </div>
+):("")}
+                  </div>
+                  <div class="modal-footer">
+                    {!localStorage.getItem("token") ? (
+                      <form className="d-flex"></form>
+                    ) : (
+                      <button onClick={Changepass} className="btn btn-primary">
+                        ChangePassword
+                      </button>
+                    )}
                     {!localStorage.getItem("token") ? (
                       <form className="d-flex"></form>
                     ) : (
@@ -133,18 +192,6 @@ export default function Navbar() {
                         Logout
                       </button>
                     )}
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Save changes
-                    </button>
                   </div>
                 </div>
               </div>

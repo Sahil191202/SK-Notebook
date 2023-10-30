@@ -16,7 +16,7 @@ function Signup() {
     e.preventDefault();
     setIsloading(true);
     const response = await fetch(
-      "https://your-notes-by-sk.onrender.com/api/auth/createuser",
+      "http://localhost:5000/api/auth/createuser",
       {
         method: "POST",
         headers: {
@@ -140,6 +140,7 @@ function Signup() {
               onChange={(e) => postDetails(e.target.files[0])}
             />
           </div>
+          <img src={credentials.profile} alt="pp" />
           <div className="mb-3 form-check">
             <input
               type="checkbox"
