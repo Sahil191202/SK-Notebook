@@ -9,7 +9,7 @@ function Signup() {
     name: "",
     email: "",
     password: "",
-    profile:"",
+    profile: "",
   });
   let history = useHistory();
   const handleclick = async (e) => {
@@ -36,6 +36,7 @@ function Signup() {
       localStorage.setItem("token", json.authToken);
       history.push("/notes");
       setIsloading(false);
+      window.location.reload();
     }
   };
 
@@ -127,31 +128,37 @@ function Signup() {
               className="form-control"
               id="exampleInputPassword1"
             />
+            <div id="passwordHelp" className="form-text">
+              Your Password is Always Safe With Us.
+            </div>
+          </div>
+          <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
               Profile Picture
             </label>
             <input
               type="file"
-              className="contact-inp2"
+              className="form-control"
               accept="image/*"
               name="profile"
               id="profile"
               style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
               onChange={(e) => postDetails(e.target.files[0])}
             />
+            <div id="passwordHelp" className="form-text">
+              Choose A Beautiful Image For Yourself.
+            </div>
           </div>
-          <img src={credentials.profile} alt="pp" />
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
-            </label>
-          </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "#F21401",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "20px",
+            }}
+          >
             {isloading ? (
               <div className="spinner-grow text-success" role="status">
                 <span className="visually-hidden">Loading...</span>

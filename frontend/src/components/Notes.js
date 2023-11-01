@@ -178,7 +178,13 @@ export default function Notes() {
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: "transparent",
+              border: "5px solid white",
+            }}
+          >
             <div className="modal-header">
               <h5 className="modal-title " id="exampleModalLabel">
                 Note title
@@ -206,6 +212,7 @@ export default function Notes() {
                   <br />
                   <br />
                   <textarea
+                    style={{ color: "white" }}
                     name="edescription"
                     value={note.edescription}
                     placeholder=" Description"
@@ -280,6 +287,7 @@ export default function Notes() {
                 Close
               </button>
               <button
+                style={{ backgroundColor: "#F21401",border:"none" }}
                 type="button"
                 onClick={handleclick}
                 className="btn btn-primary"
@@ -304,7 +312,6 @@ export default function Notes() {
             <Noteitem updateNote={updateNote} key={note._id} note={note} />
           );
         })}
-        ;
       </div>
     </>
   );

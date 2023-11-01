@@ -3,6 +3,10 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 function Login() {
+  const [show, setShow] = useState(false);
+  const showhide = () => {
+    setShow(!show);
+  };
   const [credentials, setcredentials] = useState("");
   const [isloading, setIsloading] = useState(false);
   let history = useHistory();
@@ -28,6 +32,7 @@ function Login() {
       localStorage.setItem("token", json.authToken);
       history.push("/notes");
       setIsloading(false);
+      window.location.reload();
     } else {
       setIsloading(false);
       alert("Invaild Credentials Entered");
@@ -63,24 +68,24 @@ function Login() {
               Password
             </label>
             <input
-              type="password"
+              type={show ? "text" : "password"}
               name="password"
               onChange={handlechange}
               className="form-control"
               id="exampleInputPassword1"
             />
+            <div id="passwordHelp" className="form-text">
+              Your Password is Always Safe With Us.
+            </div>
           </div>
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
-            </label>
-          </div>
+
           <button
+            style={{
+              backgroundColor: "#F21401",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "20px",
+            }}
             type="submit"
             disabled={isloading}
             className="btn btn-primary"
@@ -94,6 +99,9 @@ function Login() {
             )}
           </button>
         </form>
+        <div style={{}}>
+          <img style={{ maxHeight: "250px" }} src="sklogin.png" alt="" />
+        </div>
       </div>
     </>
   );

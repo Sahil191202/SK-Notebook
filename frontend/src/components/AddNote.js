@@ -167,7 +167,7 @@ export default function AddNote() {
             />
             <br />
             <br />
-            <textarea
+            <textarea style={{color:"white"}}
               name="description"
               placeholder=" Description"
               rows="10"
@@ -234,6 +234,12 @@ export default function AddNote() {
             <br />
             <br />
             <button
+              style={{
+                backgroundColor: "#F21401",
+                border: "none",
+                borderRadius: "5px",
+                fontSize: "20px",
+              }}
               className="btn btn-primary"
               disabled={
                 note.title.length < 5 ||

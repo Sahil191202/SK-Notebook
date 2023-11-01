@@ -21,14 +21,14 @@ export default function Notes() {
 
   return (
     <>
-      <h1 style={{ marginTop: "2.5em", marginLeft: "1em" }}>Your Videos</h1>
+      <h1 style={{ marginTop: ".5em", marginLeft: "1em" }}>Your Videos</h1>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {notes.map((note) => {
           return (
             <Videoitem key={note._id} note={note} />
           );
         })}
-        ;
+        
       </div>
            
     </>

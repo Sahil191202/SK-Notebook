@@ -13,21 +13,25 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag, images:localStorage.getItem("link"), pdf:localStorage.getItem("pdf") ,video:localStorage.getItem("video") }),
+      body: JSON.stringify({
+        title,
+        description,
+        tag,
+        images: localStorage.getItem("link"),
+        pdf: localStorage.getItem("pdf"),
+        video: localStorage.getItem("video"),
+      }),
     });
     const note = await response.json();
     setNotes(notes.concat(note));
     setTimeout(() => {
-      localStorage.removeItem("link")
-      
+      localStorage.removeItem("link");
     }, 3000);
     setTimeout(() => {
-      localStorage.removeItem("pdf")
-      
+      localStorage.removeItem("pdf");
     }, 3000);
     setTimeout(() => {
-      localStorage.removeItem("video")
-      
+      localStorage.removeItem("video");
     }, 3000);
   };
 
@@ -99,7 +103,14 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         authToken: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag, images:localStorage.getItem("link"), video:localStorage.getItem("video"), pdf:localStorage.getItem("pdf") }),
+      body: JSON.stringify({
+        title,
+        description,
+        tag,
+        images: localStorage.getItem("link"),
+        video: localStorage.getItem("video"),
+        pdf: localStorage.getItem("pdf"),
+      }),
     });
     const json = await response.json();
     console.log(json);
@@ -130,7 +141,17 @@ const NoteState = (props) => {
   };
   return (
     <NoteContext.Provider
-      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes, getVideos, getimages, getpdf }}
+      value={{
+        notes,
+        setNotes,
+        addNote,
+        deleteNote,
+        editNote,
+        getNotes,
+        getVideos,
+        getimages,
+        getpdf,
+      }}
     >
       {props.children}
     </NoteContext.Provider>

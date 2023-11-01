@@ -14,10 +14,18 @@ export default function Noteitem(props) {
     }
   return (
     <div className="item">
-      <div className="card text-center">
+      <div
+        className="card text-center"
+        style={{ backgroundColor: "transparent" }}
+      >
         <div
           className="card-header"
-          style={{ fontSize: "1.2em", color: "red", fontWeight: "bold" }}
+          style={{
+            fontSize: "1.2em",
+            color: "#F21401",
+            fontWeight: "bold",
+            borderBottom: "5px solid white",
+          }}
         >
           NOTE
         </div>
@@ -62,6 +70,7 @@ export default function Noteitem(props) {
           <br />
           <br />
           <button
+            style={{ backgroundColor: "#F21401", border: "none" }}
             className="btn btn-primary mx-2"
             onClick={() => {
               deleteNote(note._id);
@@ -70,6 +79,7 @@ export default function Noteitem(props) {
             DELETE
           </button>
           <button
+            style={{ backgroundColor: "#F21401", border: "none" }}
             className="btn btn-primary mx-2"
             onClick={() => {
               updateNote(note);

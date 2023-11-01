@@ -14,6 +14,7 @@ import Images from './components/Images';
 import Pdf from './components/Pdf';
 import NewNav from './components/NewNav';
 import AuthState from './context/auth/AuthState';
+import Nav from './components/Nav';
 
 
 function App() {
@@ -22,9 +23,9 @@ function App() {
    <AuthState>
    <NoteState>
    <Router>
+    <Nav />
    <NewNav/>
-   <Navbar/>
-   <Alert message="Welcome To My Drive App Guyzzz By Sahil Khan"/>
+   {/* <Alert message="Welcome To My Drive App Guyzzz By Sahil Khan"/> */}
       <Switch>
         <Route path="/pdf">
           <Pdf />

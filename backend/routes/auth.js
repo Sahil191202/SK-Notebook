@@ -13,6 +13,7 @@ router.post(
     body("email").isEmail(),
     body("name").isLength({ min: 5 }),
     body("password").isLength({ min: 5 }),
+    body("profile")
   ],
   async (req, res) => {
     let success = false;
@@ -50,7 +51,7 @@ router.post(
       res.json({ success, authToken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error Occured");
+      res.status(500).send("Some Error ");
     }
   }
 );
@@ -122,25 +123,21 @@ router.post(
     const userId = req.user.id;
 
     try {
-      // Fetch the user from the database
       const user = await User.findById(userId);
 
       if (!user) {
         return res.status(400).json({ error: "User not found" });
       }
 
-      // Check if the old password matches the stored hashed password
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
         return res.status(400).json({ error: "Invalid old password" });
       }
 
-      // Hash the new password
-      const saltRounds = 10; // You can configure the number of salt rounds
+      const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
 
-      // Update the user's password in the database
       await User.findByIdAndUpdate(userId, { password: hashedPassword });
 
       res.status(200).json({ message: "Password changed successfully" });

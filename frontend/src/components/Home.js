@@ -4,12 +4,12 @@ import Signup from "./Signup";
 
 export default function Home() {
   return (
-    <div id="about">
-      <div style={{display:"flex",justifyContent:"center"}}>
+    <div id="about" style={{marginTop:"1.3em"}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
             <button
-              class="nav-link active"
+              className="nav-link active"
               id="pills-home-tab"
               data-bs-toggle="pill"
               data-bs-target="#pills-home"
@@ -17,6 +17,7 @@ export default function Home() {
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
+              style={{ marginRight: "1em", backgroundColor: "#F21401",color:"white" }}
             >
               LOGIN
             </button>
@@ -31,6 +32,7 @@ export default function Home() {
               role="tab"
               aria-controls="pills-profile"
               aria-selected="false"
+              style={{ marginLeft: "1em",backgroundColor: "#F21401",color:"white" }}
             >
               REGISTER
             </button>

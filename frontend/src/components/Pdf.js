@@ -25,7 +25,7 @@ export default function Notes() {
         {notes.map((note) => {
           return <PdfItem key={note._id} note={note} />;
         })}
-        ;
+        
       </div>
     </>
   );

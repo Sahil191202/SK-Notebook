@@ -17,7 +17,7 @@ export default function Noteitem(props) {
   const { note } = props;
   return (
     <div className="item" style={{ height: "auto", maxWidth: "100%" }}>
-      <a href={note.pdf} target="_blank">
+      <a href={note.pdf} download='PDF'>
         {note.pdf ? (
           <img style={{ height: "auto", width: "100%" }} src={pdflogo} />
         ) : (
