@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "server" : "nodemon backend/index.js",
+    "server": "nodemon backend/index.js",
     "build": "npm install && npm install --prefix frontend && npm run build ---prefix frontend"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.2",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "otp-generator": "^4.0.1"
   }
 }
