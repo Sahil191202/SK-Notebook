@@ -6,6 +6,47 @@ const bcrypt = require("bcrypt");
 const fetchuser = require("../middleware/fetchuser");
 const jwt = require("jsonwebtoken");
 const JWT_auth = "Sahilkhan$191202";
+const otpgenerator = require('otp-generator');
+const nodemailer = require('nodemailer');
+
+  //opt vala code 
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "kingkhan120702@gmail.com",
+      pass: "jxrb emxd bgru uifv",
+    },
+});
+
+let sharedOTP = "";
+
+
+router.post("/sendotp", async (req, res) => {
+  const email = req.body.email;
+  const otp = otpgenerator.generate(6, {
+    integer: true,
+    alphabets: false,
+    specialChars: false,
+  });
+    sharedOTP = otp;
+  try {
+    // Send the OTP to the user's email
+    const mailOptions = {
+      from: "kingkhan120702@gmail.com",
+      to: email,
+      subject: "Email Verification OTP",
+      text: `Your OTP for email verification is: ${otp}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.json({ success: true, message: "OTP sent successfully" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Some Error");
+  }
+});
+
 
 router.post(
   "/createuser",
@@ -13,7 +54,8 @@ router.post(
     body("email").isEmail(),
     body("name").isLength({ min: 5 }),
     body("password").isLength({ min: 5 }),
-    body("profile")
+    body("profile"),
+    body("otp")
   ],
   async (req, res) => {
     let success = false;
@@ -22,40 +64,42 @@ router.post(
       return res.status(400).json({ success, errors: errors.array() });
     }
     try {
-      let user = await User.findOne({ email: req.body.email });
-      if (user) {
-        success = false;
-        return res
-          .status(400)
-          .json({
-            success,
-            errors: "Please enter valid email the email is already registered",
-          });
+      const email = req.body.email;
+      const providedOTP = req.body.otp;
+
+      // Generate the OTP for the provided email (matching the one sent)
+         const otp = sharedOTP;
+
+      if (providedOTP !== otp) {
+        return res.status(400).json({ success, message: "Invalid OTP" });
       }
+
+      // If you reach this point, the OTP is valid, and you can proceed with user creation
       const salt = await bcrypt.genSalt(10);
       const secPass = await bcrypt.hash(req.body.password, salt);
 
-      user = await User.create({
+      const user = await User.create({
         name: req.body.name,
-        email: req.body.email,
+        email: email,
         password: secPass,
         profile: req.body.profile,
       });
+
       const data = {
         user: {
           id: user.id,
         },
       };
+
       const authToken = jwt.sign(data, JWT_auth);
       success = true;
       res.json({ success, authToken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error ");
+      res.status(500).send("Some Error");
     }
   }
 );
-
 router.post(
   "/login",
   [body("email").isEmail(), body("password").exists({ min: 5 })],

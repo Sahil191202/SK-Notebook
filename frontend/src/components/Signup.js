@@ -1,35 +1,40 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 function Signup() {
+    const refotp = useRef(null);
+    const refCloseotp = useRef(null);
+    const modal = () => {
+      refotp.current.click();
+    };
   const [isloading, setIsloading] = useState(false);
+  const [isloadingotp, setIsloadingotp] = useState(false);
   const [pic, setPic] = useState();
   const [credentials, setcredentials] = useState({
     name: "",
     email: "",
     password: "",
     profile: "",
+    otp: "",
   });
   let history = useHistory();
   const handleclick = async (e) => {
     e.preventDefault();
     setIsloading(true);
-    const response = await fetch(
-      "https://your-notes-by-sk.onrender.com/api/auth/createuser",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: credentials.name,
-          email: credentials.email,
-          password: credentials.password,
-          profile: localStorage.getItem("profile"),
-        }),
-      }
-    );
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+        profile: localStorage.getItem("profile"),
+        otp: credentials.otp,
+      }),
+    });
     const json = await response.json();
     console.log(json);
     if (json.success) {
@@ -37,6 +42,7 @@ function Signup() {
       history.push("/notes");
       setIsloading(false);
       window.location.reload();
+      alert("Signed Up SucessFully");
     }
   };
 
@@ -80,11 +86,31 @@ function Signup() {
       return;
     }
   };
+  const handleSendOTP = async () => {
+    setIsloadingotp(true);
+    const response = await fetch("http://localhost:5000/api/auth/sendotp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: credentials.email }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    if (data.success) {
+      alert("OTP sent successfully");
+      setIsloadingotp(false);
+    } else {
+      alert("Enter Email ID");
+      setIsloadingotp(false);
+    }
+  };
 
   return (
     <>
       <div className="container">
-        <form onSubmit={handleclick}>
+        <form>
           <div className="mb-3">
             <label htmlFor="exampleInputname1" className="form-label">
               User Name
@@ -149,7 +175,8 @@ function Signup() {
               Choose A Beautiful Image For Yourself.
             </div>
           </div>
-          <button
+          <a
+            onClick={modal}
             type="submit"
             className="btn btn-primary"
             style={{
@@ -159,15 +186,98 @@ function Signup() {
               fontSize: "20px",
             }}
           >
-            {isloading ? (
-              <div className="spinner-grow text-success" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              "Submit"
-            )}
-          </button>
+            Next
+          </a>
         </form>
+      </div>
+
+      <button
+        type="button"
+        ref={refotp}
+        class="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal4"
+      >
+        Launch demo modal
+      </button>
+
+      <div
+        class="modal fade"
+        id="exampleModal4"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog  modal-dialog-centered">
+          <div class="modal-content" style={{ backgroundColor: "#051010" }}>
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                OTP Verification
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input
+                style={{ color: "black", outline: "none" }}
+                type="text"
+                name="otp"
+                placeholder="OTP"
+                value={credentials.otp}
+                onChange={handlechange}
+              />
+              &nbsp;&nbsp;
+              <a
+                className="btn btn-primary"
+                onClick={handleSendOTP}
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                  fontSize: "13px",
+                  backgroundColor: "#F21401",
+                }}
+              >
+                {isloadingotp ? (
+                  <div className="spinner-grow text-success" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  "Send OTP"
+                )}
+              </a>
+            </div>
+            <div class="modal-footer">
+              <button
+                onClick={handleclick}
+                type="submit"
+                className="btn btn-primary"
+                style={{
+                  backgroundColor: "#F21401",
+                  border: "none",
+                  borderRadius: "5px",
+                  fontSize: "20px",
+                }}
+                disabled={
+                  credentials.password.length < 8 ||
+                  credentials.otp.length < 5 ||
+                  isloading
+                }
+              >
+                {isloading ? (
+                  <div className="spinner-grow text-success" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  "Submit"
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
