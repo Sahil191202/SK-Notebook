@@ -22,19 +22,22 @@ function Signup() {
   const handleclick = async (e) => {
     e.preventDefault();
     setIsloading(true);
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-        profile: localStorage.getItem("profile"),
-        otp: credentials.otp,
-      }),
-    });
+    const response = await fetch(
+      "https://your-notes-by-sk.onrender.com/api/auth/createuser",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+          profile: localStorage.getItem("profile"),
+          otp: credentials.otp,
+        }),
+      }
+    );
     const json = await response.json();
     console.log(json);
     if (json.success) {
@@ -88,13 +91,16 @@ function Signup() {
   };
   const handleSendOTP = async () => {
     setIsloadingotp(true);
-    const response = await fetch("http://localhost:5000/api/auth/sendotp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: credentials.email }),
-    });
+    const response = await fetch(
+      "https://your-notes-by-sk.onrender.com/api/auth/sendotp",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: credentials.email }),
+      }
+    );
 
     const data = await response.json();
     console.log(data);

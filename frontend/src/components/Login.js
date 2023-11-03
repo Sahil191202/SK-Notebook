@@ -100,7 +100,7 @@ function Login() {
           </button>
         </form>
         <div style={{}}>
-          <img style={{ maxHeight: "250px" }} src="sklogin.png" alt="" />
+          <img style={{ maxHeight: "220px" }} src="sklogin.png" alt="" />
         </div>
       </div>
     </>
