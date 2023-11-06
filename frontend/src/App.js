@@ -1,8 +1,6 @@
 import './App.css';
-import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
-import Alert from './components/Alert';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,18 +13,30 @@ import Pdf from './components/Pdf';
 import NewNav from './components/NewNav';
 import AuthState from './context/auth/AuthState';
 import Nav from './components/Nav';
+import Movies from './components/Movies';
+import SHome from './pages/home/SHome';
+// import Chat from './components/Chat';
 
 
 function App() {
   return (
    <>
    <AuthState>
-   <NoteState>
-   <Router>
-    <Nav />
-   <NewNav/>
+  <Router>
+   <SHome />
+  </Router>
+   {/* <NoteState> */}
+   {/* <Router> */}
+    {/* <Nav /> */}
+   {/* <NewNav/> */}
    {/* <Alert message="Welcome To My Drive App Guyzzz By Sahil Khan"/> */}
-      <Switch>
+      {/* <Switch> */}
+        {/* <Route path="/chat">
+          <Chat />
+        </Route>
+        <Route path="/movies">
+          <Movies />
+        </Route>
         <Route path="/pdf">
           <Pdf />
         </Route>
@@ -45,7 +55,8 @@ function App() {
       </Switch>
     </Router>
     </NoteState>
-   </AuthState>
+  //  </AuthState> */}
+  </AuthState> 
    </>
   );
 }

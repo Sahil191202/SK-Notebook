@@ -9,6 +9,11 @@ const JWT_auth = "Sahilkhan$191202";
 const otpgenerator = require('otp-generator');
 const nodemailer = require('nodemailer');
 
+
+function generateNumericOTP() {
+  const otp = Math.floor(100000 + Math.random()*900000);
+  return otp.toString();
+}
   //opt vala code 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -23,11 +28,7 @@ let sharedOTP = "";
 
 router.post("/sendotp", async (req, res) => {
   const email = req.body.email;
-  const otp = otpgenerator.generate(6, {
-    integer: true,
-    alphabets: false,
-    specialChars: false,
-  });
+  const otp = generateNumericOTP();
     sharedOTP = otp;
   try {
     // Send the OTP to the user's email
@@ -139,7 +140,7 @@ router.post(
     }
   }
 );
-router.get("/getuser", fetchuser, async (req, res) => {
+router.get("/getuser",fetchuser, async (req, res) => {
   try {
     const userid = await req.user.id;
     const user = await User.findById(userid).select("-password");
@@ -192,5 +193,58 @@ router.post(
   }
 );
 
+router.get("/", async (req, res) => {
+  const userid = req.query.id;
+  const name = req.query.name;
+  try {
+    const user = userid
+      ? await User.findById(userid)
+      : await User.findOne({ name: name });
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.get("/friends/:userid", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userid);
+    const friends = await Promise.all(
+      user.followings.map((friendId) => {
+        return User.findById(friendId);
+      })
+    );
+    let friendList = [];
+    friends.map((friend) => {
+      const { _id, name, profile } = friend;
+      friendList.push({ _id, name, profile });
+    });
+    res.status(200).json(friendList);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.put("/:id/follow", async (req, res) => {
+  if (req.body.userid !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userid);
+      if (!user.followers.includes(req.body.userid)) {
+        await user.updateOne({ $push: { followers: req.body.userid } });
+        await currentUser.updateOne({ $push: { followings: req.params.id } });
+        res.status(200).json("user has been followed");
+      } else {
+        res.status(403).json("you allready follow this user");
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("you cant follow yourself");
+  }
+});
 
 module.exports = router;
