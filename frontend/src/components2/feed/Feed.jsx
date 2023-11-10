@@ -12,7 +12,6 @@ import notification from "../../assests/notification.png";
 import create from "../../assests/create.png";
 import more from "../../assests/more.jpg";
 import dot from "../../assests/dot.png";
-import person from "../../assests/me.png";
 import comment from "../../assests/comment.png";
 import save from "../../assests/save.png";
 import authContext from "../../context/auth/AuthContext";

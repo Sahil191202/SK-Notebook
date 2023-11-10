@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PostList from "./PostList";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function PostForm() {

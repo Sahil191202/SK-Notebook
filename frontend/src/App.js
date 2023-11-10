@@ -20,9 +20,6 @@ import PostForm from './components2/feed/PostForm';
 import Searchuser from './components2/feed/Searchuser';
 
 
-// import Chat from './components/Chat';
-
-
 function App() {
   return (
     <>
