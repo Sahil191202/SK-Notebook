@@ -1,0 +1,388 @@
+:root{
+    --liteColor:rgb(198, 196, 196);
+}
+
+.main{
+    width: 100%;
+    height: 100Vh;
+    display: flex;
+    overflow: hidden;
+}
+.sideMenu{
+    height: 100vh;
+    width: 20%;
+    border-right: 1px solid var(--liteColor);
+}
+.container{
+    height: 100vh;
+    width: 80%;
+    overflow-y: auto;
+}
+.post{
+    height: 100vh;
+    width: 70%;
+    /* background: pink; */
+}
+.suggestion{
+    height: 100vh;
+    width: 30%;
+    padding:35px 15px 0 0;
+}
+.logo{
+    padding: 25px 0 10px 20px;
+    filter: invert(1);
+}
+.row{
+    display: flex;
+    align-items: center;
+    padding: 0px 0 10px 20px;
+}
+.row img{
+    height: 30px;
+    width: 60px;
+    filter: invert(1);
+}
+h4{
+    padding-left: 15px;
+    margin: 14px 0;
+    font-weight: 400;
+}
+.active{
+    font-weight: 700; 
+}
+.cust_row{
+    display: flex;
+    align-items: center;
+    padding: 0px 0 10px 10px;
+}
+.profile{
+    height: 30px;
+    width: 30px;
+    border: 1px solid var(--liteColor);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.status{
+    padding: 30px 15px 5px 5px;
+}
+.subStatus{
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    border: 1px solid var(--liteColor);
+    background-image: url('../../assests/me.png');
+    background-position: center;
+    background-size: cover;
+}
+.ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 50px;
+    font-size: 12px;
+    color: var(--liteColor);
+    text-align: center;
+}
+.commonRow{
+    display: flex;
+}
+.name{
+    text-align: center;
+}
+.postProfile img{
+    height: 40px;
+    width: 40px;
+    border-radius: 25px;
+    border: 1px solid var(--liteColor);
+    background-position: center;
+    background-size: cover;
+}
+.postProfile{
+    height: 40px;
+    width: 40px;
+    border-radius: 25px;
+    border: 1px solid var(--liteColor);
+    background-position: center;
+    background-size: cover;
+}
+.postName{
+    font-weight:600;
+}
+.postDay{
+    color: var(--liteColor);
+}
+.PostDesc{
+    font-size: 12px;
+}
+.postRow{
+    display: flex;
+    justify-content: space-between;
+}
+.postContainer{
+    padding: 50px 10%;
+}
+.activity img{
+    padding-right: 5px;
+}
+.liked{
+    position: relative;
+}
+.likedProfile{
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--liteColor);
+    background-image: url('../../assests/me.png');
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.likedProfile1{
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--liteColor);
+    background-image: url('../../assests/person2.jpg');
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    left: 8px;
+    z-index: 1;
+}
+.likeCount{
+    padding-left:30px ;
+    font-size: 14px;
+    font-weight: 600;
+}
+.addComment{
+    color: var(--liteColor);
+}
+.commentBorder{
+    padding-top: 9px;
+    border-bottom: 1px solid var(--liteColor);
+}
+.emojiSize{
+    font-size: 20px;
+}
+.suggestionProfile{
+    padding-left: 9px;
+}
+.Suggested{
+    padding: 20px 0;
+}
+.seeAll{
+    font-weight: 500;
+    font-size: 13px;
+}
+.followedBy{
+    color: var(--liteColor);
+    font-size: 12px;
+}
+.pding{
+    padding-bottom: 15px;
+}
+.switch{
+    color: rgb(6, 184, 255);
+    font-size: 12px;
+}
+.postfeed{
+    max-width: 500px;
+    max-height: 500px;
+}
+#friends{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.linktag{
+      text-decoration: none;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+#hidebutton{
+    position: absolute;
+    top:20px;
+    right: 50px;
+}
+@media only screen and (max-width: 480px) {
+    :root {
+    --liteColor: rgb(198, 196, 196);
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+.sideMenu {
+    height: 100vh;
+    width: 100%; /* Adjusted for mobile */
+    border-right: none; /* Removed border for mobile */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.container {
+    height: 100vh;
+    width: 100%; /* Adjusted for mobile */
+    overflow-y: auto;
+}
+
+.post {
+    height: auto; /* Adjusted for mobile */
+    width: 100%; /* Adjusted for mobile */
+}
+
+.suggestion {
+    height: auto; /* Adjusted for mobile */
+    width: 100%; /* Adjusted for mobile */
+    padding: 20px 15px 0 15px; /* Adjusted for mobile */
+}
+
+.logo {
+    padding: 15px 0 10px 15px; /* Adjusted for mobile */
+}
+
+.row {
+    padding: 0px 0 10px 15px; /* Adjusted for mobile */
+}
+
+.row img {
+    height: 25px; /* Adjusted for mobile */
+    width: 50px; /* Adjusted for mobile */
+}
+
+h4 {
+    padding-left: 15px;
+    margin: 14px 0;
+    font-weight: 400;
+}
+
+.cust_row {
+    padding: 0px 0 10px 10px; /* Adjusted for mobile */
+}
+
+.profile {
+    height: 25px; /* Adjusted for mobile */
+    width: 25px; /* Adjusted for mobile */
+}
+
+.status {
+    padding: 20px 15px 5px 5px; /* Adjusted for mobile */
+}
+
+.subStatus {
+    height: 50px; /* Adjusted for mobile */
+    width: 50px; /* Adjusted for mobile */
+}
+
+.ellipsis {
+    width: auto; /* Adjusted for mobile */
+    font-size: 14px; /* Adjusted for mobile */
+}
+
+.commonRow {
+    display: block; /* Adjusted for mobile */
+}
+
+.postProfile img {
+    height: 30px; /* Adjusted for mobile */
+    width: 30px; /* Adjusted for mobile */
+}
+
+.postProfile {
+    height: 30px; /* Adjusted for mobile */
+    width: 30px; /* Adjusted for mobile */
+}
+
+.postName {
+    font-weight: 600;
+}
+
+.postDay {
+    color: var(--liteColor);
+}
+
+.PostDesc {
+    font-size: 14px; /* Adjusted for mobile */
+}
+
+.postRow {
+    display: block; /* Adjusted for mobile */
+}
+
+.postContainer {
+    padding: 20px 5%; /* Adjusted for mobile */
+}
+
+.likedProfile,
+.likedProfile1 {
+    height: 12px; /* Adjusted for mobile */
+    width: 12px; /* Adjusted for mobile */
+    left: 5px; /* Adjusted for mobile */
+}
+
+.likeCount {
+    padding-left: 15px; /* Adjusted for mobile */
+    font-size: 12px; /* Adjusted for mobile */
+}
+
+.addComment {
+    color: var(--liteColor);
+}
+
+.commentBorder {
+    padding-top: 5px; /* Adjusted for mobile */
+}
+
+.emojiSize {
+    font-size: 16px; /* Adjusted for mobile */
+}
+
+.suggestionProfile {
+    padding-left: 5px; /* Adjusted for mobile */
+}
+
+.Suggested {
+    padding: 10px 0; /* Adjusted for mobile */
+}
+
+.seeAll {
+    font-weight: 500;
+    font-size: 12px; /* Adjusted for mobile */
+}
+
+.followedBy {
+    color: var(--liteColor);
+    font-size: 10px; /* Adjusted for mobile */
+}
+
+.pding {
+    padding-bottom: 10px; /* Adjusted for mobile */
+}
+
+.switch {
+    font-size: 10px; /* Adjusted for mobile */
+}
+
+.postfeed {
+    max-width: 100%; /* Adjusted for mobile */
+    max-height: none; /* Adjusted for mobile */
+}
+
+#friends {
+    gap: 1em;
+}
+
+.linktag {
+    font-size: 20px; /* Adjusted for mobile */
+}
+
+
+}
+

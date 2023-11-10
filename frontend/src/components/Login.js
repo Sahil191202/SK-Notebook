@@ -27,7 +27,8 @@ function Login() {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      history.push("/notes");
+      localStorage.setItem("uid", json.uid);
+      history.push("/select");
       setIsloading(false);
       window.location.reload();
     } else {

@@ -142,3 +142,6 @@
   background: -o-linear-gradient(top, white, black);
   background: linear-gradient(to bottom, white, black);
 }
+input{
+  color:black;
+}

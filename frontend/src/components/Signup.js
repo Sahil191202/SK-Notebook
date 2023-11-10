@@ -38,11 +38,13 @@ function Signup() {
         }),
       }
     );
+    localStorage.setItem("name",credentials.name)
     const json = await response.json();
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      history.push("/notes");
+      localStorage.setItem("uid",json.uid)
+      history.push("/select");
       setIsloading(false);
       window.location.reload();
       alert("Signed Up SucessFully");
@@ -92,7 +94,7 @@ function Signup() {
   const handleSendOTP = async () => {
     setIsloadingotp(true);
     const response = await fetch(
-      "https://your-notes-by-sk.onrender.com/api/auth/sendotp",
+      "http://localhost:5000/api/auth/sendotp",
       {
         method: "POST",
         headers: {

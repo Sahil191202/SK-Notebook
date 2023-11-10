@@ -12,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
+app.use('/api/posts', require('./routes/posts'))
 
 const __dirname1 = path.resolve();
 if (NODE_ENV === "production") {

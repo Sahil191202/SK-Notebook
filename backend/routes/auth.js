@@ -91,10 +91,10 @@ router.post(
           id: user.id,
         },
       };
-
+      const uid = user.id
       const authToken = jwt.sign(data, JWT_auth);
       success = true;
-      res.json({ success, authToken });
+      res.json({ success, authToken, uid });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Some Error");
@@ -131,9 +131,10 @@ router.post(
           id: user.id,
         },
       };
+       const uid = user.id;
       const authToken = await jwt.sign(data, JWT_auth);
       success = true;
-      res.json({ success, authToken });
+      res.json({ success, authToken, uid });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Some Error Occured");
@@ -246,5 +247,25 @@ router.put("/:id/follow", async (req, res) => {
     res.status(403).json("you cant follow yourself");
   }
 });
+router.put("/:id/unfollow", async (req, res) => {
+  if (req.body.userid !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userid);
+      if (user.followers.includes(req.body.userid)) {
+        await user.updateOne({ $pull: { followers: req.body.userid } });
+        await currentUser.updateOne({ $pull: { followings: req.params.id } });
+        res.status(200).json("user has been unfollowed");
+      } else {
+        res.status(403).json("you dont follow this user");
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("you cant unfollow yourself");
+  }
+});
+
 
 module.exports = router;

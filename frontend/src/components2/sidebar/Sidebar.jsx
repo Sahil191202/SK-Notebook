@@ -13,8 +13,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 
 export default function Sidebar() {
-   const PF = "http://localhost:5000/images"
-  const userId = "65448a0960fd5c0639101e44";
+  const userId = localStorage.getItem("uid");
   const [friends, setFriends] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/api/auth/friends/${userId}`, { method: "GET" })
@@ -75,6 +74,7 @@ export default function Sidebar() {
             <li key={friend._id} className="sidebarFriend">
               <img className="sidebarFriendImg" src={friend.profile} alt="" />
               <span className="sidebarFriendName">{friend.name}</span>
+              <span className="sidebarFriendName">{friend.userId}</span>
             </li>
           ))}
         </ul>

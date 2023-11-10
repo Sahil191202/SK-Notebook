@@ -1,10 +1,34 @@
-import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import authContext from "../../context/auth/AuthContext";
 
 export default function Topbar() {
+   const [searchInput, setSearchInput] = useState("");
+   const [userData, setUserData] = useState(null);
+   const [name, setName] = useState("");
+   const [profile, setProfile] = useState("");
+
+   const handleSearch = async () => {
+     try {
+       const response = await fetch(`http://localhost:5000/api/auth/?name=${searchInput}`);
+       const userData = await response.json();
+       
+       if (userData.name && userData.profile){
+        const {name , profile } = userData;
+        setName(name);
+        setProfile(profile);
+        console.log(name)
+        console.log(profile)
+       } else{
+        console.error("User Dosent Exists")
+        setUserData(null)
+       }
+      } catch (error) {
+        console.error("Error searching for user:", error);
+       setUserData(null);
+     }
+   };
   const context = useContext(authContext);
   const { credentials, getUser } = context;
   useEffect(() => {
@@ -23,13 +47,22 @@ export default function Topbar() {
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
-            placeholder="Search for friend, post or video"
             className="searchInput"
+            type="text"
+            placeholder="Search by ID or Name"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
+          <button onClick={handleSearch}>Search</button>
         </div>
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
+          <div>
+            <p>{name}</p>
+            <img src={profile} alt="" className="topbarImg" />
+          </div>
+
           <span className="topbarLink">Homepage</span>
           <span className="topbarLink">Timeline</span>
         </div>
@@ -49,11 +82,7 @@ export default function Topbar() {
         </div>
         <Link to={`/profile/${credentials.name}`}>
           <img
-            src={
-              credentials.profile
-                ? credentials.profile
-                : ""
-            }
+            src={credentials.profile ? credentials.profile : ""}
             alt=""
             className="topbarImg"
           />

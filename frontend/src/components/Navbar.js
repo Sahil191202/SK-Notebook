@@ -10,7 +10,7 @@ export default function Navbar() {
   let history = useHistory();
   const handlelogout =()=>{
     localStorage.removeItem('token')
-    history.push('/login')
+    history.push('/home')
     refClose.current.click()
     window.location.reload()
   }
