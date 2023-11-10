@@ -19,19 +19,22 @@ function PostForm() {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     setIsloading(true);
-    const response = await fetch(`http://localhost:5000/api/posts/${userid}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        usernn: localStorage.getItem("name"),
-        userpp: localStorage.getItem("profile"),
-        desc: input.desc,
-        img: localStorage.getItem("img"),
-        userid: input.userid,
-      }),
-    });
+    const response = await fetch(
+      `https://your-notes-by-sk.onrender.com/api/posts/${userid}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usernn: localStorage.getItem("name"),
+          userpp: localStorage.getItem("profile"),
+          desc: input.desc,
+          img: localStorage.getItem("img"),
+          userid: input.userid,
+        }),
+      }
+    );
     const json = await response.json();
     console.log(json);
     if (json) {

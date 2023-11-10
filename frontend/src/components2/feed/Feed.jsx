@@ -27,7 +27,7 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const userid = localStorage.getItem("uid");
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/timeline/${userid}`)
+    fetch(`https://your-notes-by-sk.onrender.com/api/posts/timeline/${userid}`)
       .then((response) => response.json())
       .then((postsData) => {
         setPosts(postsData);
@@ -39,7 +39,9 @@ function Home() {
   }, [userid]);
   const [friends, setFriends] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/auth/friends/${userid}`, { method: "GET" })
+    fetch(`https://your-notes-by-sk.onrender.com/api/auth/friends/${userid}`, {
+      method: "GET",
+    })
       .then((response) => response.json())
       .then((data) => {
         setFriends(data);
@@ -53,7 +55,7 @@ function Home() {
   const handleLike = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts/${postId}/like`,
+        `https://your-notes-by-sk.onrender.com/api/posts/${postId}/like`,
         {
           method: "PUT",
           headers: {

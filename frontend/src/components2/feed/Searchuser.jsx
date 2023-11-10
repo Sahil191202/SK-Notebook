@@ -14,7 +14,7 @@ export default function Searchuser() {
        const handleSearch = async () => {
          try {
            const response = await fetch(
-             `http://localhost:5000/api/auth/?name=${searchInput}`
+             `https://your-notes-by-sk.onrender.com/api/auth/?name=${searchInput}`
            );
            const userData = await response.json();
 
@@ -39,7 +39,7 @@ export default function Searchuser() {
         const handleFollow = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/${userId}/follow`,
+        `https://your-notes-by-sk.onrender.com/api/auth/${userId}/follow`,
         {
           method: "PUT",
           headers: {
@@ -64,7 +64,7 @@ export default function Searchuser() {
         const handleUnFollow = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/${userId}/unfollow`,
+        `https://your-notes-by-sk.onrender.com/api/auth/${userId}/unfollow`,
         {
           method: "PUT",
           headers: {
