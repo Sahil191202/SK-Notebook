@@ -14,6 +14,10 @@ export default function Navbar() {
     refClose.current.click()
     window.location.reload()
   }
+  const handleselect =()=>{
+    history.push('/select')
+    refClose.current.click()
+  }
    const modal = () => {
      ref.current.click();
    };
@@ -123,8 +127,9 @@ export default function Navbar() {
                     borderRadius: "5px",
                   }}
                   className="btn btn-primary"
+                  onClick={handleselect}
                 >
-                  ChangePassword
+                  Home
                 </button>
               )}
               {!localStorage.getItem("token") ? (

@@ -18,6 +18,8 @@ import SHome from './pages/home/SHome';
 import Select from './components/Select';
 import PostForm from './components2/feed/PostForm';
 import Searchuser from './components2/feed/Searchuser';
+import SProfile from './pages/profile/SProfile';
+import Messenger from './components2/messenger/Messenger';
 
 
 function App() {
@@ -52,8 +54,14 @@ function App() {
                 <NewNav />
                 <About />
               </Route>
+              <Route path="/messenger">
+                <Messenger />
+              </Route>
               <Route path="/searchuser">
                 <Searchuser />
+              </Route>
+              <Route path="/profilepage">
+                <SProfile />
               </Route>
               <Route path="/createpost">
                 <PostForm />

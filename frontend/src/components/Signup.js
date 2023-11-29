@@ -48,7 +48,7 @@ function Signup() {
       setIsloading(false);
       window.location.reload();
       alert("Signed Up SucessFully");
-    }
+    } 
   };
 
   const handlechange = (e) => {

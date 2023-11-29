@@ -23,12 +23,8 @@ export default function Searchuser() {
              setName(name);
              setProfile(profile);
               setUserId(_id); 
-             console.log(name);
-             console.log(profile);
-                 console.log(_id);
-             console.log(userData);
            } else {
-             console.error("User Dosent Exists");
+             alert("User Dosent Exists");
              setUserData(null);
            }
          } catch (error) {

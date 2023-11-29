@@ -1,0 +1,70 @@
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.containermes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.infocont,
+.inputcont {
+  background-color: #051010;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+
+.inputcont {
+  bottom: 0;
+  height: 70px;
+}
+
+.messages {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 507px; /* Set a maximum height for the messages container */
+  margin-top: 4.2em;
+}
+
+.formmes {
+  display: flex;
+}
+
+.inputmes {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.sendButtonmes {
+  padding: 10px;
+  background-color: #F21401;;
+  color: white;
+  border: none;
+}
+
+.convocont {
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Add media query for mobile devices */
+@media (max-width: 767px) {
+  .infocont,
+  .inputcont {
+    padding: 5px;
+  }
+  
+  .messcont {
+    padding: 5px;
+  }
+  .messages {
+  max-height: 700px; /* Set a maximum height for the messages container */
+}
+}

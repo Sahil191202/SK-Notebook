@@ -164,10 +164,12 @@ export default function AddNote() {
               value={note.title}
               onChange={onchange}
               required
+              style={{ color: "white" }}
             />
             <br />
             <br />
-            <textarea style={{color:"white"}}
+            <textarea
+              style={{ color: "white" }}
               name="description"
               placeholder=" Description"
               rows="10"
@@ -188,6 +190,7 @@ export default function AddNote() {
               value={note.tag}
               required
               onChange={onchange}
+              style={{ color: "white" }}
             />
             <br />
             <br />
@@ -200,7 +203,11 @@ export default function AddNote() {
               accept="image/*"
               name="images"
               id="images"
-              style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+              style={{
+                paddingTop: ".3em",
+                paddingLeft: "1.3em",
+                color: "white",
+              }}
               onChange={(e) => postDetails(e.target.files[0])}
             />
             <br />
@@ -214,7 +221,11 @@ export default function AddNote() {
               accept="application/pdf"
               name="pdf"
               id="pdf"
-              style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+              style={{
+                paddingTop: ".3em",
+                paddingLeft: "1.3em",
+                color: "white",
+              }}
               onChange={(e) => postDetailpdf(e.target.files[0])}
             />
             <br />
@@ -228,7 +239,11 @@ export default function AddNote() {
               accept="video/*"
               name="video"
               id="video"
-              style={{ paddingTop: ".3em", paddingLeft: "1.3em" }}
+              style={{
+                paddingTop: ".3em",
+                paddingLeft: "1.3em",
+                color: "white",
+              }}
               onChange={(e) => postDetailvideo(e.target.files[0])}
             />
             <br />
